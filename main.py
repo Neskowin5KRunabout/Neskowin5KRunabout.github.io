@@ -15,9 +15,12 @@ class MainHandler(webapp.RequestHandler):
     self.response.headers ['Content-Type'] = 'text/html'
     self.response.out.write (template.render (path, {}))
 
-def main ():
-  application = webapp.WSGIApplication ([('/(.*html)?', MainHandler)], debug=True)
-  util.run_wsgi_app (application)
+    
+import webapp2
 
-if __name__ == '__main__':
-  main ()
+class MainPage(webapp2.RequestHandler):
+  def get(self):
+    self.response.headers['Content-Type'] = 'text/plain'
+    self.response.out.write('Hello, WebApp World!')
+
+app = webapp2.WSGIApplication([('/', MainPage)])
